@@ -11,7 +11,11 @@ export default observer(function Header({ restaurantName, logo }: Props) {
   return (
     <Row align="middle">
       <Col span={4}>
-        <Image src={logo} className="circle-image" preview={false} />
+        <Image
+          src={`https://coffeemenu.ir${logo}`}
+          className="circle-image"
+          preview={false}
+        />
       </Col>
       <Col span={12}>
         <h1>{restaurantName}</h1>
