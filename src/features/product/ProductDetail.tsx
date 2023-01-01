@@ -8,14 +8,14 @@ import { useStore } from "../../app/stores/store";
 
 export default observer(function ProductDetail() {
   const { productStore } = useStore();
-  const { productId } = useParams<{
+  const { branchId, tableNumber, productId } = useParams<{
     branchId: string;
     tableNumber: string;
     productId: string;
   }>();
 
   useEffect(() => {
-    productStore.loadProduct(productId);
+    productStore.loadProduct(productId!);
   }, [productStore, productId]);
 
   const data = [""];

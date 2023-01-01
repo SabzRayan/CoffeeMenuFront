@@ -18,7 +18,7 @@ export default observer(function ProductList() {
   useEffect(() => {
     productStore.setFilterByCategoryId(categoryId);
     productStore.loadProducts();
-    categoryStore.loadCategory(categoryId);
+    categoryStore.loadCategory(categoryId!);
   }, [productStore, categoryId, categoryStore]);
 
   if (categoryStore.loadingInitial || productStore.loadingInitial)

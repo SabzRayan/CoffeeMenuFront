@@ -17,7 +17,7 @@ export default observer(function CategoryPage() {
   }>();
 
   useEffect(() => {
-    branchStore.loadBranch(branchId);
+    branchStore.loadBranch(branchId!);
   }, [branchStore, branchId]);
 
   if (branchStore.loadingInitial) return <LoadingComponent />;

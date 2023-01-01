@@ -13,7 +13,7 @@ export default observer(function BestProducts() {
   }>();
 
   useEffect(() => {
-    productStore.loadBestProducts(branchId);
+    productStore.loadBestProducts(branchId!);
   }, [productStore, branchId]);
 
   if (productStore.loading) return <LoadingComponent />;

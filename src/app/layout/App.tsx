@@ -1,6 +1,6 @@
-import { ConfigProvider, Layout } from "antd";
+import { ConfigProvider } from "antd";
 import { observer } from "mobx-react-lite";
-import { Route, Switch } from "react-router-dom"; //useLocation
+import { Route } from "react-router-dom"; //useLocation
 import HomePage from "../../features/home/HomePage";
 //import { ToastContainer } from "react-toastify";
 import NotFound from "../../features/errors/NotFound";
@@ -8,6 +8,7 @@ import ServerError from "../../features/errors/ServerError";
 import CategoryPage from "../../features/category/CategoryPage";
 import ProductDetail from "../../features/product/ProductDetail";
 import ProductList from "../../features/product/ProductList";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import { useStore } from "../stores/store";
 // import LoadingComponent from "./LoadingComponent";
 //import ModalContainer from "../common/modals/ModalContainer";
@@ -15,8 +16,30 @@ import ProductList from "../../features/product/ProductList";
 //import RegisterSuccess from "../../features/users/RegisterSuccess";
 //import ConfirmEmail from "../../features/users/ConfirmEmail";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/branch/:branchId/:tableNumber",
+    element: <CategoryPage />,
+  },
+  {
+    path: "/branch/:branchId/:tableNumber/category/:categoryId",
+    element: <ProductList />,
+  },
+  {
+    path: "/branch/:branchId/:tableNumber/product/:productId",
+    element: <ProductDetail />,
+  },
+  {
+    path: "/server-error",
+    element: <ServerError />,
+  },
+]);
+
 function App() {
-  const { Content } = Layout;
   //const location = useLocation();
   //const { commonStore } = useStore(); //userStore
 
@@ -32,32 +55,27 @@ function App() {
 
   return (
     <ConfigProvider direction="rtl">
+      <RouterProvider router={router} />
       {/* <ToastContainer position="bottom-right" hideProgressBar /> */}
       {/* <ModalContainer /> */}
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        {/* <Route
+      {/* <Route path="/" element={<HomePage />} /> */}
+      {/* <Route
         path={"/(.+)"}
         render={() => (
           <>
             <Content>
               <Switch> */}
-        <Route
-          exact
-          path="/branch/:branchId/:tableNumber"
-          component={CategoryPage}
-        />
-        <Route
-          path="/branch/:branchId/:tableNumber/category/:categoryId"
-          component={ProductList}
-        />
-        <Route
-          path="/branch/:branchId/:tableNumber/product/:productId"
-          component={ProductDetail}
-        />
-        <Route path="/server-error" component={ServerError} />
-        <Route component={NotFound} />
-      </Switch>
+      {/* <Route path="/branch/:branchId/:tableNumber" element={<CategoryPage />} /> */}
+      {/* <Route
+        path="/branch/:branchId/:tableNumber/category/:categoryId"
+        element={<ProductList />}
+      /> */}
+      {/* <Route
+        path="/branch/:branchId/:tableNumber/product/:productId"
+        element={<ProductDetail />}
+      /> */}
+      {/* <Route path="/server-error" element={<ServerError />} /> */}
+      {/* <Route element={<NotFound />} /> */}
       {/* </Switch>
             </Content>
           </>

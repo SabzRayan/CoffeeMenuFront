@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { history } from "../..";
 import { Branch } from "../models/branch";
 import { Category } from "../models/category";
 import { PaginatedResult } from "../models/pagination";
@@ -70,11 +69,11 @@ axios.interceptors.response.use(
       //     break;
       case 404:
         console.log("Not Found");
-        history.push("/not-found");
+        //history.push("/not-found");
         break;
       case 500:
         store.commonStore.setServerError(data);
-        history.push("/server-error");
+        //history.push("/server-error");
         break;
     }
     return Promise.reject(error);
