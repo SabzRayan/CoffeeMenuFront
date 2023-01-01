@@ -1,13 +1,7 @@
-// import { useEffect } from "react";
 import { ConfigProvider, Layout } from "antd";
-//import NavBar from "./NavBar";
-//import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
 import { observer } from "mobx-react-lite";
 import { Route, Switch } from "react-router-dom"; //useLocation
 import HomePage from "../../features/home/HomePage";
-//import ActivityForm from "../../features/activities/form/ActivityForm";
-//import ActivityDetails from "../../features/activities/details/ActivityDetalis";
-//import TestErrors from "../../features/errors/TestError";
 //import { ToastContainer } from "react-toastify";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
@@ -17,7 +11,6 @@ import ProductList from "../../features/product/ProductList";
 // import { useStore } from "../stores/store";
 // import LoadingComponent from "./LoadingComponent";
 //import ModalContainer from "../common/modals/ModalContainer";
-//import ProfilePage from "../../features/profiles/ProfilePage";
 //import PrivateRoute from "./PrivateRoute";
 //import RegisterSuccess from "../../features/users/RegisterSuccess";
 //import ConfirmEmail from "../../features/users/ConfirmEmail";
@@ -41,41 +34,35 @@ function App() {
     <ConfigProvider direction="rtl">
       {/* <ToastContainer position="bottom-right" hideProgressBar /> */}
       {/* <ModalContainer /> */}
-      <Route exact path="/" component={HomePage} />
-      <Route
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        {/* <Route
         path={"/(.+)"}
         render={() => (
           <>
             <Content>
-              <Switch>
-                <Route
-                  exact
-                  path="/branch/:branchId/:tableNumber"
-                  component={CategoryPage}
-                />
-                <Route
-                  exact
-                  path="/branch/:branchId/:tableNumber/category/:categoryId"
-                  component={ProductList}
-                />
-                <Route
-                  exact
-                  path="/branch/:branchId/:tableNumber/product/:productId"
-                  component={ProductDetail}
-                />
-                {/* <Route exact path="/activities" component={ActivityDashboard} />
-                <Route
-                  key={location.key}
-                  path={["/createActivity", "/manage/:id"]}
-                  component={ActivityForm}
-                />*/}
-                <Route path="/server-error" component={ServerError} />
-                <Route component={NotFound} />
-              </Switch>
+              <Switch> */}
+        <Route
+          exact
+          path="/branch/:branchId/:tableNumber"
+          component={CategoryPage}
+        />
+        <Route
+          path="/branch/:branchId/:tableNumber/category/:categoryId"
+          component={ProductList}
+        />
+        <Route
+          path="/branch/:branchId/:tableNumber/product/:productId"
+          component={ProductDetail}
+        />
+        <Route path="/server-error" component={ServerError} />
+        <Route component={NotFound} />
+      </Switch>
+      {/* </Switch>
             </Content>
           </>
         )}
-      />
+      /> */}
     </ConfigProvider>
   );
 }

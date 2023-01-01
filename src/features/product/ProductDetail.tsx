@@ -1,21 +1,38 @@
 import { ArrowRightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, Carousel, Col, List, Row } from "antd";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import LoadingComponent from "../../app/layout/LoadingComponent";
+import { useStore } from "../../app/stores/store";
 
 export default observer(function ProductDetail() {
-  const imageList = [
-    "/assets/images/food-detail.png",
-    "/assets/images/food-detail.png",
-    "/assets/images/food-detail.png",
-  ];
-  const title = "سالاد سزار";
-  const data = ["شامل آب، نان، مرغ، تخم مرغ", "320 کالری", ""];
+  const { productStore } = useStore();
+  const { productId } = useParams<{
+    branchId: string;
+    tableNumber: string;
+    productId: string;
+  }>();
+
+  useEffect(() => {
+    productStore.loadProduct(productId);
+  }, [productStore, productId]);
+
+  const data = [""];
+
+  if (productStore.loadingInitial || productStore.loadingInitial)
+    return <LoadingComponent />;
 
   return (
     <>
       <Carousel autoplay dotPosition="bottom">
-        {imageList.map((url, index) => (
-          <img alt="food" src={url} width="100%" key={index} />
+        {productStore.selectedProduct?.attachments.map((attachment) => (
+          <img
+            alt="food"
+            src={`https://coffeemenu.ir${attachment.url}`}
+            width="100%"
+            key={attachment.id}
+          />
         ))}
       </Carousel>
       <Row className="product-detail-header" align="middle">
@@ -24,7 +41,7 @@ export default observer(function ProductDetail() {
         </Col>
         {/* <Col span={8} offset={12} className="title-icons">
           <Badge size="small" count={2} offset={[-5, 10]}>
-            <ShoppingCartOutlined className="header-icon" />
+            <ShoppingCartOutli  ned className="header-icon" />
           </Badge>
         </Col> */}
       </Row>
@@ -33,7 +50,7 @@ export default observer(function ProductDetail() {
         className="product-detail-list"
         header={
           <>
-            <h2>{title}</h2>
+            <h2>{productStore.selectedProduct?.title}</h2>
             <hr color="#353535" />
           </>
         }
@@ -42,7 +59,8 @@ export default observer(function ProductDetail() {
       />
 
       <Button className="product-detail-add-basket-button">
-        افزودن به سبد خرید - T150,000
+        T {productStore.selectedProduct?.price}
+        {/* افزودن به سبد خرید - T150,000 */}
       </Button>
     </>
   );

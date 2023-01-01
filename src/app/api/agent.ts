@@ -44,7 +44,8 @@ axios.interceptors.response.use(
           //toast.error(data);
         }
         if (config?.method === "get" && data.errors.hasOwnProperty("id")) {
-          history.push("/not-found");
+          console.log(data.errors);
+          //history.push("/not-found");
         }
         if (data.errors) {
           const modalStateErrors = [];
@@ -68,6 +69,7 @@ axios.interceptors.response.use(
       //     }
       //     break;
       case 404:
+        console.log("Not Found");
         history.push("/not-found");
         break;
       case 500:
@@ -114,6 +116,8 @@ const Products = {
     axios
       .get<PaginatedResult<Product[]>>("/product", { params })
       .then(responseBody),
+  best: (params: URLSearchParams) =>
+    axios.get<Product[]>("/product/best", { params }).then(responseBody),
   details: (id: string) => requests.get<Product>(`/product/${id}`),
 };
 

@@ -5,12 +5,14 @@ import { Product } from "../models/product";
 
 export default class ProductStore {
   productList: Product[] = [];
+  bestProductList: Product[] = [];
   selectedProduct: Product | undefined = undefined;
   loading = false;
   loadingInitial = true;
   pagination: Pagination | null = null;
   pagingParams = new PagingParams();
   filterByCategoryId: string | undefined = undefined;
+  filterByBranchId: string | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -37,6 +39,10 @@ export default class ProductStore {
     this.filterByCategoryId = categoryId;
   };
 
+  setFilterByBranchId = (branchId: string | undefined) => {
+    this.filterByBranchId = branchId;
+  };
+
   get axiosParams() {
     const params = new URLSearchParams();
     if (this.filterByCategoryId)
@@ -58,6 +64,20 @@ export default class ProductStore {
     } catch (error) {
       console.log(error);
       this.setLoadingInitial(false);
+    }
+  };
+
+  loadBestProducts = async (branchId: string) => {
+    this.loading = true;
+    const params = new URLSearchParams();
+    params.append("branchId", branchId);
+    try {
+      var result = await agent.Products.best(params);
+      this.bestProductList = result;
+      this.setLoading(false);
+    } catch (error) {
+      console.log(error);
+      this.setLoading(false);
     }
   };
 
@@ -93,6 +113,10 @@ export default class ProductStore {
 
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;
+  };
+
+  setLoading = (state: boolean) => {
+    this.loading = state;
   };
 
   clearSelectedProduct = () => {
