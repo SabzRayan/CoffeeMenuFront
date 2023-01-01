@@ -1,0 +1,166 @@
+body {
+  font-family: "NotoSans" !important;
+  background-color: #191a1f !important;
+  color: white;
+}
+
+button,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "NotoSans" !important;
+}
+
+/*home page styles*/
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.masthead .ui.menu .ui.button,
+.ui.menu a.ui.inverted.button {
+  margin-left: 0.5em;
+}
+
+.masthead h1.ui.header {
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
+/* Category Page */
+
+.header-icon {
+  font-size: 20px;
+  border: 1px #36373c solid;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+  color: white;
+}
+
+.circle-image {
+  border-radius: 50%;
+  max-width: 60px;
+}
+
+.title-icons {
+  text-align: left;
+}
+
+.search-field {
+  margin: 20px 15px;
+  width: calc(100vw - 50px);
+  padding: 20px;
+  background-color: #1f222b;
+  border-color: transparent;
+  border-radius: 20px;
+  color: #737373;
+}
+
+.search-field input {
+  background-color: #1f222b;
+  color: #737373;
+}
+
+.search-field input::placeholder {
+  color: #737373;
+}
+
+.subtitle-text {
+  margin: 0 20px;
+}
+
+.category-list {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.food-card {
+  background-color: #1f222b;
+  border-color: transparent;
+  border-radius: 25px !important;
+}
+
+.food-card .ant-card-cover {
+  padding: 15px;
+}
+
+.food-card-pic {
+  background-color: #eeeff3;
+  border-radius: 25px !important;
+}
+
+.food-card-title {
+  margin: 0;
+  text-align: right;
+  color: white;
+}
+
+.food-card-price {
+  color: #1bad4b;
+  font-size: 16px;
+  float: left;
+  font-weight: bold;
+}
+
+.food-card-like-count {
+  font-size: 16px;
+  float: right;
+  color: white;
+}
+
+.food-card-like-count svg {
+  color: red;
+}
+
+/* Product Detail Page */
+
+.product-detail-header {
+  position: absolute;
+  top: 10px;
+  width: calc(100vw - 20px);
+}
+
+.back-icon {
+  font-size: 20px;
+  padding: 10px;
+  margin: 5px;
+  color: white;
+}
+
+.product-detail-list {
+  color: white !important;
+  padding: 0 20px;
+}
+
+.product-detail-list .ant-list-item {
+  color: white;
+}
+
+.product-detail-add-basket-button {
+  background-color: #1bad4b;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  height: 50px;
+  width: calc(100vw - 20px);
+  position: fixed;
+  bottom: 20px;
+}
+
+.product-detail-add-basket-button:hover {
+  background-color: #1bad4b;
+  color: white !important;
+  box-shadow: 0 2px 4px 0 #1bad4b;
+}
