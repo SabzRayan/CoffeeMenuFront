@@ -7,7 +7,7 @@ import Header from "./Header";
 import CategoryList from "./CategoryList";
 import BestProducts from "../product/BestProducts";
 import { useEffect } from "react";
-// import LoadingComponent from "../../app/layout/LoadingComponent";
+import LoadingComponent from "../../app/layout/LoadingComponent";
 
 export default observer(function CategoryPage() {
   const { branchStore } = useStore();
@@ -20,7 +20,7 @@ export default observer(function CategoryPage() {
     branchStore.loadBranch(branchId);
   }, [branchStore, branchId]);
 
-  //if (!branchStore.loadingInitial) return <LoadingComponent />;
+  if (branchStore.loadingInitial) return <LoadingComponent />;
 
   return (
     <>

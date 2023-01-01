@@ -1,9 +1,27 @@
 import { ArrowRightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Col, Row } from "antd";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import LoadingComponent from "../../app/layout/LoadingComponent";
+import { useStore } from "../../app/stores/store";
 import ProductCard from "./ProductCard";
 
 export default observer(function ProductList() {
+  const { productStore, categoryStore } = useStore();
+  const { categoryId } = useParams<{
+    categoryId: string;
+  }>();
+
+  useEffect(() => {
+    productStore.setFilterByCategoryId(categoryId);
+    productStore.loadProducts();
+    categoryStore.loadCategory(categoryId);
+  }, [productStore, categoryId, categoryStore]);
+
+  if (categoryStore.loadingInitial || productStore.loadingInitial)
+    return <LoadingComponent />;
+
   return (
     <>
       <Row align="middle">
@@ -16,40 +34,20 @@ export default observer(function ProductList() {
           </Badge>
         </Col> */}
       </Row>
-      <h2 className="subtitle-text">دسته بندی سالاد</h2>
+      <h2 className="subtitle-text">
+        دسته بندی {categoryStore.selectedCategory?.name}
+      </h2>
       <Row align="middle" gutter={[16, 16]} className="category-list">
-        <Col span={12}>
-          <ProductCard
-            image="/assets/images/salad-plate.png"
-            title="سالاد سزار"
-            price={150000}
-            likesCount={8}
-          />
-        </Col>
-        <Col span={12}>
-          <ProductCard
-            image="/assets/images/salad-plate.png"
-            title="سالاد تزار"
-            price={120000}
-            likesCount={5}
-          />
-        </Col>
-        <Col span={12}>
-          <ProductCard
-            image="/assets/images/salad-plate.png"
-            title="سالاد سزار"
-            price={150000}
-            likesCount={3}
-          />
-        </Col>
-        <Col span={12}>
-          <ProductCard
-            image="/assets/images/salad-plate.png"
-            title="سالاد تزار"
-            price={120000}
-            likesCount={2}
-          />
-        </Col>
+        {productStore.productList.map((product) => (
+          <Col span={12} key={product.id}>
+            <ProductCard
+              image={`https://coffeemenu.ir${product.attachments[0].url}`}
+              title={product.title}
+              price={product.price}
+              likesCount={product.likeCount}
+            />
+          </Col>
+        ))}
       </Row>
     </>
   );

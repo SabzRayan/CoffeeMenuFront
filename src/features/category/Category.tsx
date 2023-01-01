@@ -1,6 +1,6 @@
 import { Image } from "antd";
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 interface Props {
   image: string;
@@ -9,10 +9,13 @@ interface Props {
 }
 
 export default observer(function Category({ categoryId, image, title }: Props) {
-  const tableNumber = 1;
+  const { branchId, tableNumber } = useParams<{
+    branchId: string;
+    tableNumber: string;
+  }>();
 
   return (
-    <Link to={`${tableNumber}/category/${categoryId}`}>
+    <Link to={`/branch/${branchId}/${tableNumber}/category/${categoryId}`}>
       <Image preview={false} src={image} />
       <br />
       {title}
