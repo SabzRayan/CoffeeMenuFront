@@ -15,7 +15,7 @@ axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
 
 axios.interceptors.request.use((config) => {
   const token = store.commonStore.token;
-  if (token) config.headers!.Authorization = `Bearer ${token}`;
+  // if (token) config.headers!.Authorization = `Bearer ${token}`;
   return config;
 });
 
@@ -91,17 +91,7 @@ const requests = {
 };
 
 const Branches = {
-  //   list: (params: URLSearchParams) =>
-  //     axios
-  //       .get<PaginatedResult<Activity[]>>("/activities", { params })
-  //       .then(responseBody),
   details: (id: string) => requests.get<Branch>(`/branch/${id}`),
-  //   create: (activity: ActivityFormValues) =>
-  //     requests.post<void>("/activities", activity),
-  //   update: (activity: ActivityFormValues) =>
-  //     requests.put<void>(`/activities/${activity.id}`, activity),
-  //   delete: (id: string) => requests.del<void>(`/activities/${id}`),
-  //   attend: (id: string) => requests.post<void>(`/activities/${id}/attend`, {}),
 };
 
 const Categories = {
@@ -119,44 +109,6 @@ const Products = {
     axios.get<Product[]>("/product/best", { params }).then(responseBody),
   details: (id: string) => requests.get<Product>(`/product/${id}`),
 };
-
-// const Account = {
-//   current: () => requests.get<User>("/account"),
-//   login: (user: UserFormValues) => requests.post<User>("/account/login", user),
-//   register: (user: UserFormValues) =>
-//     requests.post<User>("/account/register", user),
-//   refreshToken: () => requests.post<User>("/account/refreshToken", {}),
-//   verifyEmail: (token: string, email: string) =>
-//     requests.post<void>(
-//       `/account/verifyEmail?token${token}&email=${email}`,
-//       {}
-//     ),
-//   resendEmailConfirm: (email: string) =>
-//     requests.get(`/account/resendEmailConfirmationLink?email=${email}`),
-// };
-
-// const Categories = {
-//   get: (username: string) => requests.get<Profile>(`/profiles/${username}`),
-//   uploadPhoto: (file: Blob) => {
-//     let formData = new FormData();
-//     formData.append("File", file);
-//     return axios.post<Photo>("photos", formData, {
-//       headers: { "Content-type": "multipart/form-data" },
-//     });
-//   },
-//   setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-//   deletePhoto: (id: string) => requests.del(`/photos/${id}`),
-//   updateProfile: (profile: Partial<Profile>) =>
-//     requests.put(`/profiles`, profile),
-//   updateFollowing: (username: string) =>
-//     requests.post(`/follow/${username}`, {}),
-//   listFollowings: (username: string, predicate: string) =>
-//     requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`),
-//   listActivities: (username: string, predicate: string) =>
-//     requests.get<UserActivity[]>(
-//       `/profiles/${username}/activities?predicate=${predicate}`
-//     ),
-// };
 
 const agent = {
   Branches,

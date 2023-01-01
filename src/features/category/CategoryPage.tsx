@@ -24,21 +24,17 @@ export default observer(function CategoryPage() {
 
   return (
     <>
-      {/* Header */}
       <Header
         restaurantName={branchStore.selectedBranch?.name}
         logo={branchStore.selectedBranch?.logo}
       />
-      {/* Search Bar */}
       <Input
         className="search-field"
         size="large"
         placeholder="چی میل داری؟"
         prefix={<SearchOutlined />}
       />
-      {/* Category List */}
       <CategoryList />
-      {/* Best Products */}
       <BestProducts />
     </>
   );

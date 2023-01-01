@@ -55,7 +55,7 @@ export default observer(function ProductDetail() {
           </>
         }
         dataSource={data}
-        renderItem={(item) => <List.Item>{item}</List.Item>}
+        renderItem={(item: string) => <List.Item>{item}</List.Item>}
       />
 
       <Button className="product-detail-add-basket-button">
