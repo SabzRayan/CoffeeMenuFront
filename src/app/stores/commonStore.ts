@@ -11,7 +11,7 @@ export default class CommonStore {
 
     reaction(
       () => this.token,
-      (token: string) => {
+      (token: string | null) => {
         if (token) {
           window.localStorage.setItem("jwt", token);
         } else {
