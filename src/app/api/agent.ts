@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
 import { Branch } from "../models/branch";
 import { Category } from "../models/category";
 import { PaginatedResult } from "../models/pagination";
@@ -21,7 +22,7 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(
   async (response) => {
-    if (import.meta.env.NODE_ENV === "development") await sleep(1000);
+    // await sleep(1000);
     const pagination = response.headers["pagination"];
     if (pagination) {
       response.data = new PaginatedResult(
@@ -33,6 +34,7 @@ axios.interceptors.response.use(
     return response;
   },
   (error: AxiosError) => {
+    const navigate = useNavigate();
     const status = error.response?.status;
     const data: any = error.response?.data;
     const config = error.response?.config;
@@ -69,11 +71,11 @@ axios.interceptors.response.use(
       //     break;
       case 404:
         console.log("Not Found");
-        //history.push("/not-found");
+        navigate("/not-found");
         break;
       case 500:
         store.commonStore.setServerError(data);
-        //history.push("/server-error");
+        navigate("/server-error");
         break;
     }
     return Promise.reject(error);
