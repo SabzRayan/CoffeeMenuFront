@@ -2,6 +2,8 @@ body {
   font-family: "NotoSans" !important;
   background-color: #191a1f !important;
   color: white;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 button,
@@ -16,6 +18,12 @@ a {
 
 a {
   color: white;
+}
+
+.ant-skeleton {
+  background-color: #252525;
+  border-radius: 15px;
+  padding: 10px;
 }
 
 /*home page styles*/
@@ -64,7 +72,7 @@ a {
 
 .search-field {
   margin: 20px 15px;
-  width: calc(100vw - 50px);
+  width: calc(100% - 50px);
   padding: 20px;
   background-color: #1f222b;
   border-color: transparent;
@@ -133,7 +141,7 @@ a {
 .product-detail-header {
   position: absolute;
   top: 10px;
-  width: calc(100vw - 20px);
+  width: calc(100% - 20px);
 }
 
 .back-icon {
@@ -159,9 +167,10 @@ a {
   border: none;
   border-radius: 25px;
   height: 50px;
-  width: calc(100vw - 20px);
+  width: calc(100% - 20px);
   position: fixed;
   bottom: 20px;
+  max-width: 480px;
 }
 
 .product-detail-add-basket-button:hover {
