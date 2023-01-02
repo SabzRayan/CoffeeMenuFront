@@ -36,7 +36,8 @@ export default class ProductStore {
   };
 
   setFilterByCategoryId = (categoryId: string | undefined) => {
-    this.filterByCategoryId = categoryId;
+    if (this.filterByCategoryId != categoryId)
+      this.filterByCategoryId = categoryId;
   };
 
   setFilterByBranchId = (branchId: string | undefined) => {
@@ -45,6 +46,8 @@ export default class ProductStore {
 
   get axiosParams() {
     const params = new URLSearchParams();
+    params.append("pageNumber", this.pagingParams.pageNumber.toString());
+    params.append("pageSize", this.pagingParams.pageSize.toString());
     if (this.filterByCategoryId)
       params.append("categoryId", this.filterByCategoryId);
     return params;
@@ -58,7 +61,9 @@ export default class ProductStore {
     this.loadingInitial = true;
     try {
       var result = await agent.Products.list(this.axiosParams);
-      this.productList = result.data;
+      result.data.forEach((product) => {
+        this.productList.push(product);
+      });
       this.setPagination(result.pagination);
       this.setLoadingInitial(false);
     } catch (error) {
