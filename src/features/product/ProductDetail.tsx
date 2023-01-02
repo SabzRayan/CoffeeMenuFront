@@ -2,15 +2,14 @@ import { ArrowRightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, Carousel, Col, List, Row } from "antd";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
 
 export default observer(function ProductDetail() {
+  const navigate = useNavigate();
   const { productStore } = useStore();
-  const { branchId, tableNumber, productId } = useParams<{
-    branchId: string;
-    tableNumber: string;
+  const { productId } = useParams<{
     productId: string;
   }>();
 
@@ -18,10 +17,18 @@ export default observer(function ProductDetail() {
     productStore.loadProduct(productId!);
   }, [productStore, productId]);
 
-  const data = [""];
+  const data = [productStore.selectedProduct?.categoryName ?? ""];
 
-  if (productStore.loadingInitial || productStore.loadingInitial)
-    return <LoadingComponent />;
+  if (productStore.selectedProduct?.description)
+    data.push(productStore.selectedProduct?.description);
+
+  if (productStore.selectedProduct?.recipe)
+    data.push(productStore.selectedProduct?.recipe);
+
+  if (productStore.selectedProduct?.calory)
+    data.push(`کالری: ${productStore.selectedProduct.calory}`);
+
+  if (productStore.loadingInitial) return <LoadingComponent />;
 
   return (
     <>
@@ -37,7 +44,10 @@ export default observer(function ProductDetail() {
       </Carousel>
       <Row className="product-detail-header" align="middle">
         <Col span={4}>
-          <ArrowRightOutlined className="back-icon" />
+          <ArrowRightOutlined
+            className="back-icon"
+            onClick={() => navigate(-1)}
+          />
         </Col>
         {/* <Col span={8} offset={12} className="title-icons">
           <Badge size="small" count={2} offset={[-5, 10]}>
