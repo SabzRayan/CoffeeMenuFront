@@ -1,6 +1,7 @@
-import { BellOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { BellOutlined } from "@ant-design/icons";
 import { Col, Row, Image, Badge, Skeleton } from "antd";
 import { observer } from "mobx-react-lite";
+import CartIcon from "../../app/layout/CartIcon";
 
 interface Props {
   restaurantName: string | undefined;
@@ -28,12 +29,10 @@ export default observer(function Header({ restaurantName, logo }: Props) {
           <h1>{restaurantName}</h1>
         )}
       </Col>
-      {/* <Col span={8} className="title-icons">
-        <BellOutlined className="header-icon" />
-        <Badge size="small" count={2} offset={[-5, 10]}>
-          <ShoppingCartOutlined className="header-icon" />
-        </Badge>
-      </Col> */}
+      <Col span={8} className="title-icons">
+        {/*  <BellOutlined className="header-icon" />*/}
+        <CartIcon />
+      </Col>
     </Row>
   );
 });
