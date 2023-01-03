@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import BranchStore from "./branchStore";
+import CartStore from "./cartStore";
 import CategoryStore from "./categoryStore";
 import CommonStore from "./commonStore";
 import ModalStore from "./modalStore";
@@ -11,6 +12,7 @@ interface Store {
   categoryStore: CategoryStore;
   productStore: ProductStore;
   branchStore: BranchStore;
+  cartStore: CartStore;
 }
 
 export const store: Store = {
@@ -19,6 +21,7 @@ export const store: Store = {
   categoryStore: new CategoryStore(),
   productStore: new ProductStore(),
   branchStore: new BranchStore(),
+  cartStore: new CartStore(),
 };
 
 export const StoreContext = createContext(store);
