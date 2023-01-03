@@ -186,6 +186,11 @@ a {
   background-color: #1f222b;
   border-color: transparent;
   border-radius: 20px !important;
+  width: 100%;
+}
+
+.ant-list-item:has(> .food-cart) {
+  padding: 5px 24px;
 }
 
 .food-cart .ant-card-body {
