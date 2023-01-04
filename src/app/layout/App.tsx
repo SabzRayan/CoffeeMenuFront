@@ -1,4 +1,5 @@
 import { ConfigProvider } from "antd";
+import { observer } from "mobx-react-lite";
 import HomePage from "../../features/home/HomePage";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
@@ -6,9 +7,10 @@ import CategoryPage from "../../features/category/CategoryPage";
 import ProductDetail from "../../features/product/ProductDetail";
 import ProductList from "../../features/product/ProductList";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ReactDOM from "react-dom/client";
-import { store, StoreContext } from "../stores/store";
+import { useStore } from "../stores/store";
 import "./styles.css";
+import { useEffect } from "react";
+import CartList from "../../features/cart/CartList";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/branch/:branchId/:tableNumber",
     element: <CategoryPage />,
+  },
+  {
+    path: "/branch/:branchId/:tableNumber/cart",
+    element: <CartList />,
   },
   {
     path: "/branch/:branchId/:tableNumber/category/:categoryId",
@@ -37,22 +43,18 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+function App() {
+  const { cartStore } = useStore();
 
-root.render(
-  <StoreContext.Provider value={store}>
+  useEffect(() => {
+    cartStore.loadCart();
+  }, []);
+
+  return (
     <ConfigProvider direction="rtl">
       <RouterProvider router={router} />
     </ConfigProvider>
-  </StoreContext.Provider>
-);
+  );
+}
 
-// function App() {
-//   return (
-
-//   );
-// }
-
-// export default observer(App);
+export default observer(App);

@@ -1,14 +1,15 @@
-import { ArrowRightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Button, Carousel, Col, List, Row } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { Button, Carousel, Col, List, Row } from "antd";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import CartIcon from "../../app/layout/CartIcon";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
 
 export default observer(function ProductDetail() {
   const navigate = useNavigate();
-  const { productStore } = useStore();
+  const { productStore, cartStore } = useStore();
   const { productId } = useParams<{
     productId: string;
   }>();
@@ -49,11 +50,9 @@ export default observer(function ProductDetail() {
             onClick={() => navigate(-1)}
           />
         </Col>
-        {/* <Col span={8} offset={12} className="title-icons">
-          <Badge size="small" count={2} offset={[-5, 10]}>
-            <ShoppingCartOutli  ned className="header-icon" />
-          </Badge>
-        </Col> */}
+        <Col span={8} offset={12} className="title-icons">
+          <CartIcon />
+        </Col>
       </Row>
 
       <List
@@ -68,9 +67,11 @@ export default observer(function ProductDetail() {
         renderItem={(item: string) => <List.Item>{item}</List.Item>}
       />
 
-      <Button className="product-detail-add-basket-button">
-        T {productStore.selectedProduct?.price}
-        {/* افزودن به سبد خرید - T150,000 */}
+      <Button
+        onClick={() => cartStore.addToCart(productStore.selectedProduct!)}
+        className="product-detail-add-basket-button"
+      >
+        افزودن به سبد خرید - T{productStore.selectedProduct?.price}
       </Button>
     </>
   );

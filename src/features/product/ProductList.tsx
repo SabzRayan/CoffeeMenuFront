@@ -7,6 +7,7 @@ import { PagingParams } from "../../app/models/pagination";
 import { useStore } from "../../app/stores/store";
 import ProductCard from "./ProductCard";
 import InfiniteScroll from "react-infinite-scroller";
+import CartIcon from "../../app/layout/CartIcon";
 
 export default observer(function ProductList() {
   const navigate = useNavigate();
@@ -43,11 +44,9 @@ export default observer(function ProductList() {
             onClick={() => navigate(-1)}
           />
         </Col>
-        {/* <Col span={8} offset={12} className="title-icons">
-          <Badge size="small" count={2} offset={[-5, 10]}>
-            <ShoppingCartOutlined className="header-icon" />
-          </Badge>
-        </Col> */}
+        <Col span={8} offset={12} className="title-icons">
+          <CartIcon />
+        </Col>
       </Row>
       <h2 className="subtitle-text">
         دسته بندی{" "}
