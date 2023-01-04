@@ -28,7 +28,8 @@ export default class CartStore {
 
   removeFromCart = (productId: string) => {
     let productIndex = this.cart.findIndex((a) => a.productId == productId);
-    if (productIndex && productIndex > -1) this.cart.splice(productIndex, 1);
+    if (productIndex != null && productIndex > -1)
+      this.cart.splice(productIndex, 1);
     this.saveCart();
   };
 
