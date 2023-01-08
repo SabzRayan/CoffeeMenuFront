@@ -32,7 +32,9 @@ export default observer(function ProductCard({ product }: Props) {
           title={<h3 className="food-card-title">{product.title}</h3>}
           description={
             <>
-              <span className="food-card-price">T{product.price}</span>
+              <span className="food-card-price">
+                {product.price.toLocaleString()} تومان
+              </span>
               <span className="food-card-like-count">
                 <HeartOutlined /> {product.likeCount}
               </span>

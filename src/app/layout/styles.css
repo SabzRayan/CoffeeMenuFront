@@ -1,5 +1,5 @@
 body {
-  font-family: "NotoSans" !important;
+  font-family: "iransans" !important;
   background-color: #191a1f !important;
   color: white;
   max-width: 500px;
@@ -12,8 +12,10 @@ h2,
 h3,
 h4,
 h5,
-a {
-  font-family: "NotoSans" !important;
+a,
+.food-cart,
+.food-card {
+  font-family: "iransans" !important;
 }
 
 a {
