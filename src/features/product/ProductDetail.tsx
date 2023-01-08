@@ -71,7 +71,8 @@ export default observer(function ProductDetail() {
         onClick={() => cartStore.addToCart(productStore.selectedProduct!)}
         className="product-detail-add-basket-button"
       >
-        افزودن به سبد خرید - T{productStore.selectedProduct?.price}
+        افزودن به سبد خرید -{" "}
+        {productStore.selectedProduct?.price.toLocaleString()} تومان
       </Button>
     </>
   );

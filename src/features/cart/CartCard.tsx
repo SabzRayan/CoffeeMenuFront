@@ -55,7 +55,7 @@ export default observer(function CartCard({ product }: Props) {
             <span className="food-cart-count">{product.count} عدد</span>
             <br />
             <span className="food-cart-price">
-              T{product.price * product.count}
+              {(product.price * product.count).toLocaleString()} تومان
             </span>
           </>
         }
