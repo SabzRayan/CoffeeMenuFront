@@ -1,18 +1,21 @@
 import { observer } from "mobx-react-lite";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useStore } from "../../app/stores/store";
 import Header from "./Header";
 import CategoryList from "./CategoryList";
 import BestProducts from "../product/BestProducts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default observer(function CategoryPage() {
   const { branchStore } = useStore();
-  const { branchId } = useParams<{
+  const { branchId, tableNumber } = useParams<{
     branchId: string;
+    tableNumber: string;
   }>();
+  const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     branchStore.loadBranch(branchId!);
@@ -27,6 +30,14 @@ export default observer(function CategoryPage() {
       <Input
         className="search-field"
         size="large"
+        value={searchValue}
+        onPressEnter={() => {
+          if (searchValue)
+            navigate(
+              `/branch/${branchId}/${tableNumber}/search/${searchValue}`
+            );
+        }}
+        onChange={(e) => setSearchValue(e.target.value)}
         placeholder="چی میل داری؟"
         prefix={<SearchOutlined />}
       />

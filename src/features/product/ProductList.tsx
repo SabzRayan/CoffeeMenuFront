@@ -17,17 +17,24 @@ export default observer(function ProductList() {
     setFilterByCategoryId,
     loadProducts,
     setPagingParams,
+    setFilterBySearchTitle,
     pagination,
     productList,
   } = productStore;
-  const { categoryId } = useParams<{
+  const { categoryId, search } = useParams<{
     categoryId: string;
+    search: string;
   }>();
 
   useEffect(() => {
-    setFilterByCategoryId(categoryId);
-    categoryStore.loadCategory(categoryId!);
-  }, [categoryId]);
+    if (categoryId) {
+      setFilterByCategoryId(categoryId);
+      categoryStore.loadCategory(categoryId!);
+    }
+    if (search) {
+      setFilterBySearchTitle(search);
+    }
+  }, [categoryId, search]);
 
   const loadMoreData = () => {
     setLoadingNext(true);
@@ -48,14 +55,17 @@ export default observer(function ProductList() {
           <CartIcon />
         </Col>
       </Row>
-      <h2 className="subtitle-text">
-        دسته بندی{" "}
-        {categoryStore.selectedCategory?.name ? (
-          categoryStore.selectedCategory.name
-        ) : (
-          <Skeleton.Input active />
-        )}
-      </h2>
+      {categoryId && (
+        <h2 className="subtitle-text">
+          دسته بندی{" "}
+          {categoryStore.selectedCategory?.name ? (
+            categoryStore.selectedCategory.name
+          ) : (
+            <Skeleton.Input active />
+          )}
+        </h2>
+      )}
+      {search && <h2 className="subtitle-text">جستجوی واژه {search}</h2>}
       <InfiniteScroll
         pageStart={0}
         loadMore={loadMoreData}

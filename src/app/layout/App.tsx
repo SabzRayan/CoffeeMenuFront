@@ -30,6 +30,10 @@ const router = createBrowserRouter([
     element: <ProductList />,
   },
   {
+    path: "/branch/:branchId/:tableNumber/search/:search",
+    element: <ProductList />,
+  },
+  {
     path: "/branch/:branchId/:tableNumber/product/:productId",
     element: <ProductDetail />,
   },

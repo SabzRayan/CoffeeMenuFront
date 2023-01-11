@@ -12,17 +12,11 @@ export default class ProductStore {
   pagination: Pagination | null = null;
   pagingParams = new PagingParams();
   filterByCategoryId: string | undefined = undefined;
+  filterBySearchTitle: string | undefined = undefined;
   filterByBranchId: string | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
-
-    reaction(
-      () => this.filterByCategoryId,
-      () => {
-        this.clearAndLoad();
-      }
-    );
   }
 
   clearAndLoad() {
@@ -36,8 +30,16 @@ export default class ProductStore {
   };
 
   setFilterByCategoryId = (categoryId: string | undefined) => {
+    if (this.filterBySearchTitle) this.filterBySearchTitle = undefined;
     if (this.filterByCategoryId != categoryId)
       this.filterByCategoryId = categoryId;
+    this.clearAndLoad();
+  };
+
+  setFilterBySearchTitle = (search: string | undefined) => {
+    if (this.filterByCategoryId) this.filterByCategoryId = undefined;
+    if (this.filterBySearchTitle != search) this.filterBySearchTitle = search;
+    this.clearAndLoad();
   };
 
   setFilterByBranchId = (branchId: string | undefined) => {
@@ -50,6 +52,8 @@ export default class ProductStore {
     params.append("pageSize", this.pagingParams.pageSize.toString());
     if (this.filterByCategoryId)
       params.append("categoryId", this.filterByCategoryId);
+    if (this.filterBySearchTitle)
+      params.append("title", this.filterBySearchTitle);
     return params;
   }
 
