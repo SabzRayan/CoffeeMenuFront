@@ -93,6 +93,10 @@ const requests = {
 };
 
 const Branches = {
+  list: (params: URLSearchParams) =>
+    axios
+      .get<PaginatedResult<Branch[]>>("/branch", { params })
+      .then(responseBody),
   details: (id: string) => requests.get<Branch>(`/branch/${id}`),
 };
 

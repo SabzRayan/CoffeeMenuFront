@@ -6,7 +6,7 @@ export default observer(function HomePage() {
     <div className="masthead">
       <QRCode
         errorLevel="H"
-        value="https://karen-food.ir/branch/29aebb6b-7530-4a13-8f07-08daeb8137d8/1"
+        value="https://karen-food.ir/restaurant/2f09ee07-e0e4-4672-2237-08daeb80240d/1"
         icon="https://karen-food.ir/attachments/iisos0w2.lxh/logo.png"
       />
     </div>

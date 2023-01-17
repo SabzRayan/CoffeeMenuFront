@@ -11,11 +11,16 @@ import { useStore } from "../stores/store";
 import "./styles.css";
 import { useEffect } from "react";
 import CartList from "../../features/cart/CartList";
+import RestaurantPage from "../../features/restaurant/RestaurantPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path: "/restaurant/:restaurantId/:tableNumber",
+    element: <RestaurantPage />,
   },
   {
     path: "/branch/:branchId/:tableNumber",

@@ -52,6 +52,23 @@ a {
   font-weight: normal;
 }
 
+/* Restaurant Page */
+
+.branch-list .branch-link {
+  display: flex;
+  align-items: center;
+  background: #193445;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.branch-list .branch-image {
+  max-height: 50px;
+  margin-left: 10px;
+}
+
 /* Category Page */
 
 .header-icon {
