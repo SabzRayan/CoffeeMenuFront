@@ -1,4 +1,5 @@
 import { Attachment } from "./attachment";
+import { ProductPrice } from "./productPrice";
 
 export interface Product {
   id: string;
@@ -16,4 +17,5 @@ export interface Product {
   categoryName: string;
   likeCount: number;
   attachments: Attachment[];
+  productPrices: ProductPrice[];
 }

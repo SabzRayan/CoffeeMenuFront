@@ -14,7 +14,9 @@ h4,
 h5,
 a,
 .food-cart,
-.food-card {
+.food-card,
+li,
+label {
   font-family: "iransans" !important;
 }
 
@@ -179,6 +181,21 @@ a {
   color: white;
 }
 
+.product-detail-price-container {
+  position: fixed;
+  max-width: 480px;
+  bottom: 20px;
+  width: calc(100% - 20px);
+}
+
+.product-detail-radio-group {
+  margin: 15px;
+}
+
+.product-detail-radio {
+  color: white;
+}
+
 .product-detail-add-basket-button {
   background-color: #1bad4b;
   color: white;
@@ -187,9 +204,6 @@ a {
   border-radius: 25px;
   height: 50px;
   width: calc(100% - 20px);
-  position: fixed;
-  bottom: 20px;
-  max-width: 480px;
 }
 
 .product-detail-add-basket-button:hover {

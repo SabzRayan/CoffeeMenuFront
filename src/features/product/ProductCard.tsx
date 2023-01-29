@@ -24,7 +24,11 @@ export default observer(function ProductCard({ product }: Props) {
           <img
             className="food-card-pic"
             alt="Food"
-            src={`https://coffeemenu.ir${product.attachments[0].url}`}
+            src={
+              product.attachments[0]
+                ? `https://coffeemenu.ir${product.attachments[0].url}`
+                : "https://coffeemenu.ir/attachments/w0qtvcjm.jli/default-food.png"
+            }
           />
         }
       >

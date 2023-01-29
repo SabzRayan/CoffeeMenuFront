@@ -1,7 +1,16 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { Button, Carousel, Col, List, Row } from "antd";
+import {
+  Button,
+  Carousel,
+  Col,
+  List,
+  Radio,
+  RadioChangeEvent,
+  Row,
+  Space,
+} from "antd";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CartIcon from "../../app/layout/CartIcon";
 import LoadingComponent from "../../app/layout/LoadingComponent";
@@ -13,9 +22,16 @@ export default observer(function ProductDetail() {
   const { productId } = useParams<{
     productId: string;
   }>();
+  const [selectedPrice, setSelectedPrice] = useState(
+    productStore.selectedProduct?.productPrices[0]
+  );
 
   useEffect(() => {
     productStore.loadProduct(productId!);
+    return () => {
+      setSelectedPrice(undefined);
+      productStore.clearSelectedProduct();
+    };
   }, [productStore, productId]);
 
   const data = [productStore.selectedProduct?.categoryName ?? ""];
@@ -29,19 +45,35 @@ export default observer(function ProductDetail() {
   if (productStore.selectedProduct?.calory)
     data.push(`کالری: ${productStore.selectedProduct.calory}`);
 
+  const priceChange = (e: RadioChangeEvent) => {
+    console.log(e.target.value);
+    let selectedPrice = productStore.selectedProduct?.productPrices.find(
+      (a) => a.id === e.target.value
+    );
+    setSelectedPrice(selectedPrice);
+  };
+
   if (productStore.loadingInitial) return <LoadingComponent />;
 
   return (
     <>
       <Carousel autoplay dotPosition="bottom">
-        {productStore.selectedProduct?.attachments.map((attachment) => (
+        {productStore.selectedProduct?.attachments.length ? (
+          productStore.selectedProduct?.attachments.map((attachment) => (
+            <img
+              alt="food"
+              src={`https://coffeemenu.ir${attachment.url}`}
+              width="100%"
+              key={attachment.id}
+            />
+          ))
+        ) : (
           <img
             alt="food"
-            src={`https://coffeemenu.ir${attachment.url}`}
+            src="https://coffeemenu.ir/attachments/w0qtvcjm.jli/default-food.png"
             width="100%"
-            key={attachment.id}
           />
-        ))}
+        )}
       </Carousel>
       <Row className="product-detail-header" align="middle">
         <Col span={4}>
@@ -67,13 +99,41 @@ export default observer(function ProductDetail() {
         renderItem={(item: string) => <List.Item>{item}</List.Item>}
       />
 
-      <Button
-        onClick={() => cartStore.addToCart(productStore.selectedProduct!)}
-        className="product-detail-add-basket-button"
-      >
-        افزودن به سبد خرید -{" "}
-        {productStore.selectedProduct?.price.toLocaleString()} تومان
-      </Button>
+      <div className="product-detail-price-container">
+        {productStore.selectedProduct &&
+          productStore.selectedProduct.productPrices.length > 1 && (
+            <Radio.Group
+              className="product-detail-radio-group"
+              onChange={priceChange}
+              defaultValue={productStore.selectedProduct?.productPrices[0].id}
+              value={selectedPrice?.id}
+            >
+              <Space direction="vertical">
+                {productStore.selectedProduct?.productPrices.map((price) => (
+                  <Radio className="product-detail-radio" value={price.id}>
+                    {price.title}
+                  </Radio>
+                ))}
+              </Space>
+            </Radio.Group>
+          )}
+        <br />
+        <Button
+          onClick={() =>
+            cartStore.addToCart(
+              productStore.selectedProduct!,
+              selectedPrice ?? productStore.selectedProduct!.productPrices[0]
+            )
+          }
+          className="product-detail-add-basket-button"
+        >
+          افزودن به سبد خرید -{" "}
+          {selectedPrice
+            ? selectedPrice?.price.toLocaleString()
+            : productStore.selectedProduct?.price.toLocaleString()}{" "}
+          تومان
+        </Button>
+      </div>
     </>
   );
 });

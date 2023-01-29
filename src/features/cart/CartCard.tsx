@@ -19,10 +19,20 @@ export default observer(function CartCard({ product }: Props) {
           <Avatar
             className="food-cart-pic"
             size="large"
-            src={`https://coffeemenu.ir${product.product.attachments[0].url}`}
+            src={
+              product.product.attachments[0]
+                ? `https://coffeemenu.ir${product.product.attachments[0].url}`
+                : "https://coffeemenu.ir/attachments/w0qtvcjm.jli/default-food.png"
+            }
           />
         }
-        title={<h3 className="food-cart-title">{product.product.title}</h3>}
+        title={
+          <h3 className="food-cart-title">
+            {product.product.title}{" "}
+            {product.product.productPrices.length > 1 &&
+              `(${product.price.title})`}
+          </h3>
+        }
         description={
           <>
             <Space direction="vertical" className="food-cart-change-count">
@@ -32,7 +42,11 @@ export default observer(function CartCard({ product }: Props) {
                 shape="circle"
                 icon={<PlusOutlined />}
                 onClick={() =>
-                  cartStore.changeCount(product.productId, product.count + 1)
+                  cartStore.changeCount(
+                    product.productId,
+                    product.count + 1,
+                    product.price
+                  )
                 }
               />
               <Button
@@ -48,14 +62,18 @@ export default observer(function CartCard({ product }: Props) {
                   )
                 }
                 onClick={() =>
-                  cartStore.changeCount(product.productId, product.count - 1)
+                  cartStore.changeCount(
+                    product.productId,
+                    product.count - 1,
+                    product.price
+                  )
                 }
               />
             </Space>
             <span className="food-cart-count">{product.count} عدد</span>
             <br />
             <span className="food-cart-price">
-              {(product.price * product.count).toLocaleString()} تومان
+              {(product.price.price * product.count).toLocaleString()} تومان
             </span>
           </>
         }
