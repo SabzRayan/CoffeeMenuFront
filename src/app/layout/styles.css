@@ -37,6 +37,7 @@ a {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  flex-direction: column;
 }
 
 .masthead .ui.menu .ui.button,
@@ -64,11 +65,13 @@ a {
   border-radius: 15px;
   margin: 10px;
   text-decoration: none;
+  width: calc(100% - 50px);
 }
 
 .branch-list .branch-image {
   max-height: 50px;
   margin-left: 10px;
+  border-radius: 10px;
 }
 
 /* Category Page */

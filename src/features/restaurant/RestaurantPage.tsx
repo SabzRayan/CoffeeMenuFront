@@ -16,6 +16,7 @@ export default observer(function RestaurantPage() {
 
   return (
     <div className="masthead branch-list">
+      <h2>مجموعه غذایی کارن</h2>
       {branchStore.branchList.map((a) => (
         <Link className="branch-link" to={`/branch/${a.id}/${tableNumber}`}>
           <img className="branch-image" src={a.logo} /> {a.name}
