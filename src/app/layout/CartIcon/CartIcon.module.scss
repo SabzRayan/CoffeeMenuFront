@@ -1,0 +1,16 @@
+.cartIconContainer {
+    sup {
+        left: 57%;
+        top: 15% !important;
+    }
+}
+
+.cartIcon {
+    font-size: 2.2em;
+}
+
+@media (max-width: 360px) {
+    .cartIcon {
+        font-size: 2em;
+    }
+}
