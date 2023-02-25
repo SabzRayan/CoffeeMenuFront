@@ -1,27 +1,50 @@
-import { observer } from "mobx-react-lite";
-import { Link, useParams } from "react-router-dom";
-import { useStore } from "../../app/stores/store";
-import { useEffect } from "react";
+import { useEffect } from 'react'
+
+import { Card, theme } from 'antd'
+import { observer } from 'mobx-react-lite'
+import { Link, useParams } from 'react-router-dom'
+
+import { useStore } from '../../app/stores/store'
+import SectionTitle from '../../app/layout/SectionTitle'
+import classes from './RestaurantPage.module.scss'
+
+const { useToken } = theme
 
 export default observer(function RestaurantPage() {
-  const { branchStore } = useStore();
-  const { restaurantId, tableNumber } = useParams<{
-    restaurantId: string;
-    tableNumber: string;
-  }>();
+    const { branchStore } = useStore()
+    const { restaurantId, tableNumber } = useParams<{
+        restaurantId: string
+        tableNumber: string
+    }>()
+    const { token } = useToken()
 
-  useEffect(() => {
-    branchStore.loadBranches(restaurantId!);
-  }, [branchStore, restaurantId]);
+    useEffect(() => {
+        branchStore.loadBranches(restaurantId!)
+    }, [branchStore, restaurantId])
 
-  return (
-    <div className="masthead branch-list">
-      <h2>مجموعه غذایی کارن</h2>
-      {branchStore.branchList.map((a) => (
-        <Link className="branch-link" to={`/branch/${a.id}/${tableNumber}`}>
-          <img className="branch-image" src={a.logo} /> {a.name}
-        </Link>
-      ))}
-    </div>
-  );
-});
+    return (
+        <div className={classes.branchsContainer}>
+            <SectionTitle className={classes.branchsContainer_title}>
+                مجموعه غذایی کارن
+            </SectionTitle>
+            {branchStore.branchList.map((a) => (
+                <Card
+                    className={classes.branchsContainer_branch}
+                    bodyStyle={{ padding: '12px' }}
+                    key={a.id}
+                >
+                    <Link
+                        to={`/branch/${a.id}/${tableNumber}`}
+                        className={classes.branchsContainer_branch_link}
+                    >
+                        <img
+                            src={a.logo}
+                            style={{ border: `1px solid ${token.colorBorder}` }}
+                        />
+                        <span>{a.name}</span>
+                    </Link>
+                </Card>
+            ))}
+        </div>
+    )
+})

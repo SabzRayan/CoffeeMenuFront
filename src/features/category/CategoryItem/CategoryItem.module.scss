@@ -1,0 +1,23 @@
+.imageContainer {
+    margin-bottom: 12px;
+    & > div {
+        padding: 12px !important;
+    }
+}
+
+.title {
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 360px) {
+    .imageContainer {
+        margin-bottom: 9px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+}
