@@ -1,0 +1,82 @@
+@font-face {
+    font-family: "iransans";
+    src: url("/assets/fonts/IRANSans(FaNum).ttf");
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url("/assets/fonts/vazir/Vazir.eot");
+    src: url("/assets/fonts/vazir/Vazir.eot?#iefix") format("embedded-opentype"),
+        url("/assets/fonts/vazir/Vazir.woff") format("woff"), url("/assets/fonts/vazir/Vazir.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url("/assets/fonts/vazir/Vazir-Bold.eot");
+    src: url("/assets/fonts/vazir/Vazir-Bold.eot?#iefix") format("embedded-opentype"),
+        url("/assets/fonts/vazir/Vazir-Bold.woff") format("woff"),
+        url("/assets/fonts/vazir/Vazir-Bold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url("/assets/fonts/vazir/Vazir-Light.eot");
+    src: url("/assets/fonts/vazir/Vazir-Light.eot?#iefix") format("embedded-opentype"),
+        url("/assets/fonts/vazir/Vazir-Light.woff") format("woff"),
+        url("/assets/fonts/vazir/Vazir-Light.ttf") format("truetype");
+    font-weight: 300;
+}
+
+* {
+    font-family: "iransans" !important;
+}
+
+body {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.main-layout {
+    min-height: 100vh;
+    padding: 10px 16px 16px;
+}
+
+.px-16 {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.mx-minus-16 {
+    margin-left: -16px;
+    margin-right: -16px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Main Page */
+.header-container {
+    position: relative;
+}
+
+.header-container .menu-link {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    padding: 8px 12px;
+    background-color: #e18536;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 8px;
+}

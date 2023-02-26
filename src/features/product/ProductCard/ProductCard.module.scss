@@ -1,0 +1,32 @@
+.foodCard {
+    .title {
+        margin: 0 0 16px;
+        font-size: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .price {
+        color: #1bad4b;
+        font-weight: bold;
+    }
+
+    .likeCount {
+        text-align: left;
+        .anticon {
+            color: #ef4242;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .title {
+            font-size: 0.9em;
+        }
+
+        .price,
+        .likeCount {
+            font-size: 11px;
+        }
+    }
+}

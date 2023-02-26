@@ -1,0 +1,48 @@
+.foodCart {
+    width: 100%;
+    position: relative;
+    &_pic {
+        width: 28%;
+        display: inline-block;
+        font-size: 0;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .title,
+    .price,
+    .counter {
+        position: absolute;
+        right: 37%;
+    }
+
+    .title {
+        top: 10%;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .price {
+        top: 71%;
+        color: #1bad4b;
+        font-weight: bold;
+    }
+
+    .counter {
+        top: 39%;
+    }
+
+    @media (max-width: 360px) {
+        .title,
+        .price {
+            font-size: 12px;
+        }
+    }
+}
