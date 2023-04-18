@@ -47,6 +47,10 @@ export default class CategoryStore {
     }
   };
 
+  fetchCategories = async () => {
+    return await agent.Categories.list(this.axiosParams);
+  }
+
   loadCategory = async (id: string) => {
     let category = this.getCategory(id);
     if (category) {
