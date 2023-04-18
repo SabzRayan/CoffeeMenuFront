@@ -25,6 +25,9 @@ export default class CartStore {
       this.cart[productIndex].count++;
     } else {
       this.cart.push(new OrderDetail(product, price));
+      setTimeout(() => {
+        this.loadCart();
+      }, 500);
     }
     this.saveCart();
   };
